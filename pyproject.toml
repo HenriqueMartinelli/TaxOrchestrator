@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "processamento-tributario"
+version = "0.1.0"
+description = "Microservice for ingesting Excel orders, calculating IBS/CBS taxes and persisting to MongoDB"
+authors = ["Henrique Martinelli <henrique.martinelli@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.115.14"
+pymongo = "^4.13.2"
+polars = "^1.31.0"
+pandas = "^2.3.0"
+pydantic-settings = "^2.10.1"
+python-multipart = "^0.0.20"
+openpyxl = "^3.1.5"
+
+[tool.poetry.group.dev.dependencies]
+uvicorn = {extras = ["standard"], version = "^0.35.0"}
+python-dotenv = "^1.1.1"
+taskipy = "^1.14.1"
+pytest-cov = "^6.2.1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.4.1"
+pytest-asyncio = "^0.21.0"
+httpx = "^0.28.1"
+mongomock = "^4.3.0"
+
+[tool.pytest.ini_options]
+# Garante que tests/ seja o diretório de testes e adiciona a raiz ao PYTHONPATH
+minversion    = "8.2"
+addopts       = "-q --disable-warnings"
+asyncio_mode  = "auto"
+testpaths     = ["tests"]
+pythonpath    = "."
+
+[tool.taskipy.tasks]
+# Levanta a API em modo desenvolvimento
+up    = {cmd = "uvicorn app.main:app --reload --host 0.0.0.0 --port 8000", help = "Start the API in dev mode"}
+
+test = {cmd = "pytest --cov=.", help = "Run all tests"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

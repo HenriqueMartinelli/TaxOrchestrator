@@ -1,12 +1,11 @@
-# app/schemas.py
+from pydantic import BaseModel
 from typing import List
 from datetime import date
-from pydantic import BaseModel
 
-class ProcessResponse(BaseModel):
+class ProcessResponseDTO(BaseModel):
     message: str
 
-class Item(BaseModel):
+class ItemDTO(BaseModel):
     product_id: str
     quantity: int
     unit_price: float
@@ -15,9 +14,9 @@ class Item(BaseModel):
     value_ibs_item: float
     value_cbs_item: float
 
-class Order(BaseModel):
+class OrderDTO(BaseModel):
     order_id: str
-    items: List[Item]
+    items: List[ItemDTO]
     gross_total: float
     total_ibs: float
     total_cbs: float
@@ -25,8 +24,8 @@ class Order(BaseModel):
     processing_status: str
     calculation_date: date
 
-class OrderListOutput(BaseModel):
-    orders: List[Order]
+class OrderListDTO(BaseModel):
+    orders: List[OrderDTO]
 
-class ErrorMessage(BaseModel):
+class ErrorDTO(BaseModel):
     detail: str
