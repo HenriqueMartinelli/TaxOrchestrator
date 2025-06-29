@@ -9,6 +9,8 @@ Microserviço em Python para realizar leitura de pedidos via Excel, cálculo de 
 Este projeto adota **arquitetura hexagonal (Ports and Adapters)** com inspiração em **Clean Architecture**:
 
 ```
+![Diagrama da Arquitetura](image.png)
+
 app/
 ├── application/
 │   ├── ports/              # Interfaces (OrdersServicePort)
