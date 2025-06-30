@@ -25,11 +25,10 @@ def make_sample_excel():
     return buf
 
 def test_process_and_list_and_get(client):
-    # 1) PROCESS: upload do Excel
     buf = make_sample_excel()
     files = {
         'file': (
-            'sample_orders.xlsx',
+            'app/resources/sample_orders.xlsx',
             buf,
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )

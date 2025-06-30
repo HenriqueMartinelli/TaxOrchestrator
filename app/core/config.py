@@ -4,7 +4,7 @@ from pydantic import Field
 class Settings(BaseSettings):
     mongodb_url: str = Field(..., env="MONGODB_URL")
     mongodb_db: str = Field("orderdb", env="MONGODB_DB")
-    tax_rates_file: str = Field("tax_rates.json", env="TAX_RATES_FILE")
+    tax_rates_file: str = Field("app/resources/tax_rates.json", env="TAX_RATES_FILE")
 
     class Config:
         env_file = ".env"

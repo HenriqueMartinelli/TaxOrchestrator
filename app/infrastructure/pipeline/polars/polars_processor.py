@@ -19,8 +19,8 @@ class PolarsProcessor:
             df.group_by("order_id")
               .agg([
                   pl.struct([
-                      "product_id", "quantity", "unit_price",
-                      "ibs_rate", "cbs_rate",
+                      "product_id", "product_name","quantity", 
+                      "unit_price", "ibs_rate", "cbs_rate",
                       "value_ibs_item", "value_cbs_item"
                   ]).alias("items"),
                   (pl.col("unit_price") * pl.col("quantity")).sum().alias("gross_total"),

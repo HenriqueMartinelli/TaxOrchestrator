@@ -1,0 +1,34 @@
+[
+  {
+    "product_type": "bottle 600 ml",
+    "category_fiscal": "CAT2",
+    "origin_state": "MG",
+    "destination_state": "SP",
+    "ibs_rate": 0.15,
+    "cbs_rate": 0.07
+  },
+  {
+    "product_type": "bottle 600 ml",
+    "category_fiscal": "CAT1",
+    "origin_state": "SP",
+    "destination_state": "SP",
+    "ibs_rate": 0.08,
+    "cbs_rate": 0.05
+  },
+  {
+    "product_type": "can 473 ml",
+    "category_fiscal": "CAT1",
+    "origin_state": "MG",
+    "destination_state": "RJ",
+    "ibs_rate": 0.16,
+    "cbs_rate": 0.09
+  },
+  {
+    "product_type": "bottle 330 ml",
+    "category_fiscal": "CAT1",
+    "origin_state": "MG",
+    "destination_state": "SP",
+    "ibs_rate": 0.11,
+    "cbs_rate": 0.09
+  }
+]
