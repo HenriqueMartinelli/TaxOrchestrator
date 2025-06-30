@@ -109,4 +109,3 @@ task test
 
 ---
 
-Feito com ❤️ e boas práticas de software.
