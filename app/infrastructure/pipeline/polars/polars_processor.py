@@ -1,7 +1,7 @@
 import polars as pl
 from datetime import datetime
-import pandas as pd
 from app.infrastructure.pipeline.excel.excel_reader import ExcelReaderFactory
+from app.core.logging import logger
 
 def load_tax_rules() -> pl.DataFrame:
     import json
@@ -12,6 +12,7 @@ def load_tax_rules() -> pl.DataFrame:
 
 class PolarsProcessor:
     def process(self, lazy_df: pl.LazyFrame) -> list[dict]:
+        logger.info("Starting Polars processing")
         from app.services.tax_calculator import TaxCalculatorFactory
         df = TaxCalculatorFactory.get_strategy().apply(lazy_df)
 
@@ -35,4 +36,5 @@ class PolarsProcessor:
                 ])
         )
         result = agg.collect()
+        logger.info("Polars processing completed successfully")
         return result.to_dicts()

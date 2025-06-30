@@ -1,4 +1,5 @@
 import polars as pl
+from app.core.logging import logger
 
 class TaxStrategy:
     def apply(self, df: pl.LazyFrame) -> pl.LazyFrame:
@@ -9,6 +10,7 @@ class DefaultTaxStrategy(TaxStrategy):
         self.rates_df = rates_df
 
     def apply(self, df: pl.LazyFrame) -> pl.LazyFrame:
+        logger.info("Applying default tax strategy")
         return (
             df.join(
                 self.rates_df,
@@ -27,5 +29,6 @@ class TaxCalculatorFactory:
     @staticmethod
     def get_strategy() -> TaxStrategy:
         from app.infrastructure.pipeline.polars.polars_processor import load_tax_rules
+        logger.info("Loading tax rules from configuration")
         rates_df = load_tax_rules().lazy()
         return DefaultTaxStrategy(rates_df)

@@ -26,14 +26,18 @@ class ProcessOrdersUseCase:
         file: UploadFile,
         background_tasks: BackgroundTasks
     ) -> ProcessResponseDTO:
+        logger.info("Start processing: %s", file.filename)
+
         reader = self.reader_factory.get_reader(file.filename)
         try:
+            logger.info("Reading file with reader: %s", reader.__class__.__name__)
             df_pd = await reader.read(file)
         except SchemaValidationError as e:
             logger.error(f"Schema validation failed: {e}")
             raise
 
         try:
+            logger.info("Converting DataFrame to LazyFrame")
             lazy_df = pl.from_pandas(df_pd).lazy()
         except Exception as e:
             logger.error("Failed to convert DataFrame to LazyFrame", exc_info=True)
@@ -41,6 +45,7 @@ class ProcessOrdersUseCase:
 
         def _bg_task():
             try:
+                logger.info("Starting background processing")
                 records = self.processor.process(lazy_df)
                 self.repo.insert_many(records)
                 EventBus.publish("order.processed", {
